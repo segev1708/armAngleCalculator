@@ -1,6 +1,10 @@
 from math import  sin, cos ,tan, asin, acos, atan # import trigonometric functions
 from math import radians, degrees # import functions to convert between degrees and radians
 
+class ArmOutOfReachError(Exception):
+    """Cannot reach the target! Arm is too short!"""
+    pass
+
 def get_angle_laws_of_cosine(a:float ,b:float, c:float):
     # laws of cosine
     angle_c = acos((a**2+b**2-c**2)/(2*a*b))
@@ -32,10 +36,12 @@ def two_dimentional_calculator(lowerSize: float,
     :param target: Target tip (x,y)
     :type target: tuple[float, float]
     """
-
+    
     x, y = abs(target[0]), abs(target[1])
     
     distance = (x**2 + y**2) ** 0.5
+    if distance > higherSize+ lowerSize: 
+        raise ArmOutOfReachError
     alpha = degrees(asin(y / distance))
     higherServoAngle = get_angle_laws_of_cosine(lowerSize,higherSize,distance)
     A =  get_angle_laws_of_cosine(lowerSize,distance,higherSize)
