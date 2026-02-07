@@ -1,6 +1,6 @@
 # 🦾 Robotic Arm Angle Calculator
 
-A Python-based tool developed to calculate the necessary servo angles for a #D robotic arm to reach specific coordinate.
+A Python-based tool developed to calculate the necessary servo angles for a 3D robotic arm to reach specific coordinate.
 
 ## 🚀 Features
 - Uses the **Law of Cosines** to determine interior angles.
