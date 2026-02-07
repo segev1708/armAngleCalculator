@@ -37,7 +37,7 @@ def two_dimentional_calculator(lowerSize: float,
     :type target: tuple[float, float]
     """
     
-    x, y = abs(target[0]), abs(target[1])
+    x, y = target[0], target[1]
     
     distance = (x**2 + y**2) ** 0.5
     if distance > higherSize+ lowerSize: 
