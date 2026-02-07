@@ -49,4 +49,4 @@ def two_dimentional_calculator(lowerSize: float,
     return lowerServoAngle,higherServoAngle
 
 
-print(two_dimentional_calculator(2,2,(1,2)))
+
