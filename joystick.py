@@ -12,8 +12,8 @@ class AxisNotFound(Exception):
 class Joystick:
     def __init__(self, deviceNumber = 0,map = PS5MAP, deadzone = 8) -> None:
         self.__deviceNumber = deviceNumber
-        self.__axisDict = {}
-        self.__buttonDict = {}
+        self.__axis_dict = {}
+        self.__button_dict = {}
         self.__map = map
         self.__deadzone = deadzone #  Fight stickdrift
         self.__initiate()
@@ -23,10 +23,10 @@ class Joystick:
     def update(self): 
         pygame.event.pump()
         # PS5:
-        for axis in self.__axisDict:
-            self.__axisDict[axis] = self.__joystick.get_axis(self.__map[axis])
-        for button in self.__buttonDict:
-            self.__buttonDict[button] = self.__joystick.get_button(self.__map[button])
+        for axis in self.__axis_dict:
+            self.__axis_dict[axis] = self.__joystick.get_axis(self.__map[axis])
+        for button in self.__button_dict:
+            self.__button_dict[button] = self.__joystick.get_button(self.__map[button])
 
     # QOL:
     def set_deadzone(self,deadzone):
@@ -41,7 +41,7 @@ class Joystick:
         for button in buttons:
             if button not in self.__map:
                 raise ButtonNotFound
-            self.__buttonDict[button] = 0
+            self.__button_dict[button] = 0
 
     def add_axis(self,axes):
         if isinstance(axes, str):
@@ -49,15 +49,15 @@ class Joystick:
         for axis in axes:
             if axis not in self.__map:
                 raise AxisNotFound
-            self.__axisDict[axis] = 0
+            self.__axis_dict[axis] = 0
 
     
     
     # Get data from joystick
     def get_button(self, button):
-        return self.__buttonDict[button]
+        return self.__button_dict[button]
     def get_axis(self, axis):
-        axisValue = self.__axisDict[axis]*100 
+        axisValue = self.__axis_dict[axis]*100 
         return axisValue if abs(axisValue)-self.__deadzone > 0 else 0 
     
 """
