@@ -1,5 +1,5 @@
 from ik_calculator_2d import ik_calculator_2d as ik2d
-from ik_calculator_2d import ArmOutOfReachError 
+from ik_calculator_2d import TargetTooClose, TargetTooFar 
 from math import atan2, degrees
 def ik_calculator_3d(lower_size: float,
                                higher_size: float,
@@ -28,8 +28,11 @@ def ik_calculator_3d(lower_size: float,
         lsa, hsa = ik2d(lower_size,
                         higher_size,
                         (target[0], target[1]))
-    except ArmOutOfReachError:
+    except TargetTooFar:
         hsa = 180
+        lsa = degrees(atan2(target[1],target[0]))
+    except TargetTooClose:
+        hsa = 0
         lsa = degrees(atan2(target[1],target[0]))
 
     return (lsa, hsa, directon)
